@@ -1,7 +1,7 @@
 import  { useEffect,  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUsers, removeUser,  } from '../../features/users/usersSlice';
+import { getUsers,  } from '../../features/users/usersSlice';
 // import { toast } from 'react-hot-toast';
 
 const Home = () => {
@@ -15,18 +15,7 @@ const Home = () => {
         dispatch(getUsers())
     }, [])
 
-    // if(isLoading){
-    //     <div>Loading...</div>
-    // }
 
-    // useEffect(()=>{
-    //     if(!isLoading && deleteSuccess){
-    //         toast.success("Deleted")
-    //         dispatch(toggleDeleteSuccess())
-    //     }
-
-        
-    // }, [isLoading, deleteSuccess])
 
     const handleDelete = (id) =>{
         fetch(`https://user-management-system-assignment-backend.vercel.app/users/${id}`, {
@@ -63,7 +52,7 @@ const Home = () => {
                                 <td>{user._id}</td>
                                 <td>{user.name}</td>
                                 <td><Link to="/viewUser"><button className="btn btn-active btn-primary">View</button></Link></td>
-                                <td><Link to="/AddUser"><button className="btn btn-active btn-primary">Edit</button></Link></td>
+                                <td><Link to={`/AddUser/${user._id}`}><button className="btn btn-active btn-primary">Edit</button></Link></td>
                                 <td><button onClick={()=> handleDelete(user._id)} className="btn btn-active btn-primary" >Delete</button></td>
                             </tr>)
                         }

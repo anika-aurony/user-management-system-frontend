@@ -32,6 +32,11 @@ const router = createBrowserRouter([
         element: <AddUser></AddUser>
       },
       {
+        path: `/AddUser/:id`,
+        element: <AddUser></AddUser>,
+        loader: ({params}) => fetch(`https://user-management-system-assignment-backend.vercel.app/users/${params.id}`)
+      },
+      {
         path: "/viewUser",
         element: <ViewUser></ViewUser>
       }
