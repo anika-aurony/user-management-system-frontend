@@ -8,9 +8,9 @@ const Header = () => {
             
             <div className="navbar bg-primary text-[white]">
                 <div className="flex-1">
-                <Link to="/"><a className="btn btn-ghost normal-case text-xl text-center ">User Management System</a></Link>
+                <Link to="/"><a className="btn btn-ghost normal-case text-2xl text-center ">User Management System</a></Link>
                 </div>
-                <div className="flex-none">
+                <div className="flex-none text-xl">
                     <ul className="menu menu-horizontal px-1">
                         
                         <li><Link to="/"><a>Home</a></Link></li>
