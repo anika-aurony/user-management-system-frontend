@@ -2,6 +2,7 @@ import  { useEffect,  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getUsers,  } from '../../features/users/usersSlice';
+import { toast } from 'react-hot-toast';
 // import { toast } from 'react-hot-toast';
 
 const Home = () => {
@@ -25,6 +26,7 @@ const Home = () => {
                 .then(data => {
                     if (data.deletedCount > 0) {
                         console.log(data)
+                        toast.success("User Deleted")
                         dispatch(getUsers())
                     }
                 })
