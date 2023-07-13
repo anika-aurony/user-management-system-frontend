@@ -11,5 +11,5 @@ export const postUser = async (userData) => {
 };
 
 export const deleteUser = async (id) => {
-    await axios.delete(`/user/${id}` )
+    await axios.delete(`/users/${id}` )
 }
