@@ -1,13 +1,17 @@
-import  { useEffect, useState } from 'react';
+import  { useEffect,  } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getUsers } from '../../features/users/usersSlice';
 
 const Home = () => {
-    const [users, setUser] = useState([]);
+    
+
+    const dispatch = useDispatch();
+    const {users} = useSelector((state) => state.users)
 
     useEffect(() => {
-        fetch("http://localhost:5000/users")
-            .then(res => res.json())
-            .then(data => setUser(data))
+        
+        dispatch(getUsers())
     }, [])
 
     return (
