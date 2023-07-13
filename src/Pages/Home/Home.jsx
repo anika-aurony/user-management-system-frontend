@@ -33,22 +33,22 @@ const Home = () => {
     }
 
     return (
-        <div className='mt-4'>
+        <div className='mt-4 py-6'>
             <Link to="/AddUser"><button className="btn btn-active btn-primary">Add New User</button></Link>
             
 
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto ms-3 mt-4">
 
                 <table className="table">
                     {/* head */}
-                    <thead>
+                    <thead className='text-2xl'>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
                             
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className='text-l'>
                         {
                             users.map(user => <tr key={user._id}>
                                 <td>{user._id}</td>

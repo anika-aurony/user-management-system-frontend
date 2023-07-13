@@ -55,8 +55,8 @@ const AddUser = () => {
     }, [postSuccess])
     return (
         <div>
-            <h1 className="text-2xl text-center font-bold my-4">Add New User</h1>
-            <div className="flex justify-center item-center mt-4">
+            <h1 className="text-2xl text-center font-semibold my-4">Add / Update New User</h1>
+            <div className="flex justify-center item-center my-4">
                 <form onSubmit={handleSubmit}>
                     <div >
                         <div className="form-control w-full    ">
@@ -77,7 +77,7 @@ const AddUser = () => {
                             </label>
                             <input type="number" defaultValue={user ? user.phone : ''} placeholder="Phone Number" className="input input-bordered w-full max-w-xs" name="phone" />
                         </div>
-                        <div className="form-control mt-6">
+                        <div className="form-control mt-6 mb-6">
                             <button className="btn btn-primary">Submit</button>
                         </div>
                     </div>

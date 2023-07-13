@@ -34,7 +34,7 @@ const router = createBrowserRouter([
       {
         path: `/AddUser/:id`,
         element: <AddUser></AddUser>,
-        loader: ({params}) => fetch(`https://user-management-system-assignment-backend.vercel.app/users/${params.id}`)
+        loader: ({ params }) => fetch(`https://user-management-system-assignment-backend.vercel.app/users/${params.id}`)
       },
       {
         path: "/viewUser",
@@ -47,10 +47,12 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Toaster/>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    <Toaster />
+    <div className='bg-[#e0e7ff]'>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
+    </div>
 
   </React.StrictMode>,
 )

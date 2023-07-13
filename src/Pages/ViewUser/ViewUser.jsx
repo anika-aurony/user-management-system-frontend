@@ -13,14 +13,14 @@ const ViewUser = () => {
     }, [])
 
     return (
-        <div>
-            <h1>All Users</h1>
+        <div className='bg-[#e0e7ff] p-6'>
+            <h1 className='text-3xl py-6 font-semibold '>All Users</h1>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-x-auto ">
 
-                <table className="table">
+                <table className="table text-l">
                     {/* head */}
-                    <thead>
+                    <thead className='text-xl'>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
