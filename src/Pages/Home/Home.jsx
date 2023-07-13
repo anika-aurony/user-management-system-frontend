@@ -8,19 +8,25 @@ const Home = () => {
     
 
     const dispatch = useDispatch();
-    const {users, deleteSuccess} = useSelector((state) => state.users)
+    const {users, deleteSuccess, isLoading} = useSelector((state) => state.users)
 
     useEffect(() => {
         
         dispatch(getUsers())
     }, [])
 
+    if(isLoading){
+        <div>Loading...</div>
+    }
+    
     useEffect(()=>{
-        if(deleteSuccess){
+        if(!isLoading && deleteSuccess){
             toast.success("Deleted")
             dispatch(toggleDeleteSuccess())
         }
-    })
+
+        
+    }, [isLoading, deleteSuccess])
 
     return (
         <div className='mt-4'>

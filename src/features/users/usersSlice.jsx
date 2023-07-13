@@ -18,8 +18,9 @@ export const addUser = createAsyncThunk("users/addUser", async (data) =>{
     const users = postUser(data);
     return users;
 })
-export const removeUser = createAsyncThunk("users/removeUser", async (id) =>{
-    const users = deleteUser(id);
+export const removeUser = createAsyncThunk("users/removeUser", async (id, thunkAPI) =>{
+    const users = await deleteUser(id);
+    thunkAPI.dispatch(removeFromList(id));
     return users;
 })
 const usersSlice = createSlice({
@@ -31,6 +32,9 @@ const usersSlice = createSlice({
         },
         toggleDeleteSuccess: (state) =>{
             state.deleteSuccess= false;
+        },
+        removeFromList : (state, action) => {
+            state.users = state.users.filter(user => user._id !== action.payload)
         }
     },
     extraReducers: (builder) => {
@@ -85,6 +89,6 @@ const usersSlice = createSlice({
     }
 });
 
-export const {togglePostSuccess, toggleDeleteSuccess} = usersSlice.actions
+export const {togglePostSuccess, toggleDeleteSuccess, removeFromList} = usersSlice.actions
 
 export default usersSlice.reducer;
