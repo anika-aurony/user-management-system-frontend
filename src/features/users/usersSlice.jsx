@@ -1,20 +1,38 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { deleteUser, fetchUsers, postUser } from "./usersAPI";
 
 const initialState ={
     users: [],
     isLoading: false,
+    postSuccess: false,
+    deleteSuccess: false,
     isError: false,
     error: "",
 }
 
 export const getUsers = createAsyncThunk("users/getUser", async () =>{
-    const res = await fetch('http://localhost:5000/users');
-    const data = await res.json();
-    return data
+    const users = fetchUsers();
+    return users;
+})
+export const addUser = createAsyncThunk("users/addUser", async (data) =>{
+    const users = postUser(data);
+    return users;
+})
+export const removeUser = createAsyncThunk("users/removeUser", async (id) =>{
+    const users = deleteUser(id);
+    return users;
 })
 const usersSlice = createSlice({
     name: "users",
     initialState,
+    reducers: {
+        togglePostSuccess: (state) =>{
+            state.postSuccess= false;
+        },
+        toggleDeleteSuccess: (state) =>{
+            state.deleteSuccess= false;
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(getUsers.pending, (state, action)=>{
@@ -30,9 +48,43 @@ const usersSlice = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.error = action.error.message;
-        });
+        })
+        .addCase(addUser.pending, (state, )=>{
+            state.isLoading = true;
+            state.postSuccess = false;
+            state.isError = false
+        })
+        .addCase(addUser.fulfilled, (state)=>{
+            state.postSuccess = true
+            state.isLoading = false;
+        })
+        .addCase(addUser.rejected, (state, action)=>{
+            state.users = [];
+            state.isLoading = false;
+            state.postSuccess = false
+            state.isError = true;
+            state.error = action.error.message;
+        })
+        .addCase(removeUser.pending, (state, )=>{
+            state.isLoading = true;
+            state.deleteSuccess = false;
+            state.isError = false
+        })
+        .addCase(removeUser.fulfilled, (state)=>{
+            state.deleteSuccess = true
+            state.isLoading = false;
+        })
+        .addCase(removeUser.rejected, (state, action)=>{
+            state.users = [];
+            state.isLoading = false;
+            state.deleteSuccess = false
+            state.isError = true;
+            state.error = action.error.message;
+        })
 
     }
 });
+
+export const {togglePostSuccess, toggleDeleteSuccess} = usersSlice.actions
 
 export default usersSlice.reducer;

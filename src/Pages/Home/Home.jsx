@@ -1,18 +1,26 @@
 import  { useEffect,  } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getUsers } from '../../features/users/usersSlice';
+import { getUsers, removeUser, toggleDeleteSuccess } from '../../features/users/usersSlice';
+import { toast } from 'react-hot-toast';
 
 const Home = () => {
     
 
     const dispatch = useDispatch();
-    const {users} = useSelector((state) => state.users)
+    const {users, deleteSuccess} = useSelector((state) => state.users)
 
     useEffect(() => {
         
         dispatch(getUsers())
     }, [])
+
+    useEffect(()=>{
+        if(deleteSuccess){
+            toast.success("Deleted")
+            dispatch(toggleDeleteSuccess())
+        }
+    })
 
     return (
         <div className='mt-4'>
@@ -37,7 +45,7 @@ const Home = () => {
                                 <td>{user.name}</td>
                                 <td><Link to="/viewUser"><button className="btn btn-active btn-primary">View</button></Link></td>
                                 <td><Link to="/AddUser"><button className="btn btn-active btn-primary">Edit</button></Link></td>
-                                <td><button className="btn btn-active btn-primary">Delete</button></td>
+                                <td><button onClick={()=> dispatch(removeUser(user._id))} className="btn btn-active btn-primary" >Delete</button></td>
                             </tr>)
                         }
                         

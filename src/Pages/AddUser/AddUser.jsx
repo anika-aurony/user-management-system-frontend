@@ -1,7 +1,14 @@
+import { useDispatch, useSelector } from "react-redux";
+import { addUser, togglePostSuccess } from "../../features/users/usersSlice";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
 
 
 const AddUser = () => {
+    const {postSuccess, error, isError} = useSelector(state => state.users)
+    const dispatch = useDispatch();
 
+    
     const handleSubmit= event =>{
         event.preventDefault();
         const form = event.target;
@@ -10,24 +17,16 @@ const AddUser = () => {
         const phone = form.phone.value;
         const updateUser = {name, email, phone} 
         console.log(updateUser)
-        fetch('http://localhost:5000/users', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(updateUser)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-
-                if (data.insertedId) {
-                    alert('User added')
-                }
-                form.reset();
-
-            })
+        
+        dispatch(addUser(updateUser))
     }
+
+    useEffect(()=>{
+        if(postSuccess){
+            toast.success("User Added");
+            dispatch(togglePostSuccess())
+        }
+    },[postSuccess])
     return (
         <div>
             <h1 className="text-2xl text-center font-bold my-4">Add New User</h1>
