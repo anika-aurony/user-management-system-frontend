@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, togglePostSuccess } from "../../features/users/usersSlice";
 import { useEffect } from "react";
-import { Toaster, toast } from "react-hot-toast";
+import {  toast } from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 
 
@@ -9,7 +9,7 @@ const AddUser = () => {
 
     const user = useLoaderData();
 
-    const { postSuccess, error, isError } = useSelector(state => state.users)
+    const { postSuccess } = useSelector(state => state.users)
     const dispatch = useDispatch();
 
 
@@ -36,6 +36,7 @@ const AddUser = () => {
                 console.log(data)
                 if(data.modifiedCount>0){
                     toast.success("User Updated")
+
                 }
             })
         }
