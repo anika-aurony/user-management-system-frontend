@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 
-const Home = () => {
+const ViewUser = () => {
     const [users, setUser] = useState([]);
 
     useEffect(() => {
@@ -11,9 +10,8 @@ const Home = () => {
     }, [])
 
     return (
-        <div className='mt-4'>
-            <Link to="/AddUser"><button className="btn btn-active btn-primary">Add New User</button></Link>
-            
+        <div>
+            <h1>All Users</h1>
 
             <div className="overflow-x-auto">
 
@@ -23,6 +21,8 @@ const Home = () => {
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone number</th>
                             
                         </tr>
                     </thead>
@@ -31,9 +31,9 @@ const Home = () => {
                             users.map(user => <tr key={user._id}>
                                 <td>{user._id}</td>
                                 <td>{user.name}</td>
-                                <td><Link to="/viewUser"><button className="btn btn-active btn-primary">View</button></Link></td>
-                                <td><Link to="/AddUser"><button className="btn btn-active btn-primary">Edit</button></Link></td>
-                                <td><button className="btn btn-active btn-primary">Delete</button></td>
+                                <td>{user.email}</td>
+                                <td>{user.phone}</td>
+                                <td></td>
                             </tr>)
                         }
                         
@@ -46,4 +46,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default ViewUser;

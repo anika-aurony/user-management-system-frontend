@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import Main from './layout/Main.jsx';
 import Home from './Pages/Home/Home.jsx';
+import AddUser from './Pages/AddUser/AddUser.jsx';
+import ViewUser from './Pages/ViewUser/ViewUser.jsx';
 
 
 const router = createBrowserRouter([
@@ -20,7 +22,15 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>
-        
+
+      },
+      {
+        path: "/addUser",
+        element: <AddUser></AddUser>
+      },
+      {
+        path: "/viewUser",
+        element: <ViewUser></ViewUser>
       }
     ]
   },
